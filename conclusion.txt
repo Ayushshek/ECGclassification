@@ -1,0 +1,42 @@
+Conclusion
+
+This project evaluated the performance–efficiency trade-offs of a 2-layer CNN (64 filters, kernel size 5) for EEG epilepsy classification across four configurations: CPU baseline, GPU baseline, 20% structured pruning, and FP16 quantization.
+
+1️⃣ CPU vs GPU Baseline
+The GPU baseline reduced training time from 17.87s (CPU) to 8.52s (GPU) — nearly a 2× speedup — while maintaining virtually identical test accuracy (~98%). Additionally, GPU memory usage was dramatically lower (19.64 MB vs 356.16 MB on CPU), demonstrating the computational efficiency of GPU acceleration for convolutional workloads.
+This confirms that CNN-based EEG classification benefits significantly from parallel GPU computation without sacrificing predictive performance.
+
+2️⃣ Pruning (20%)
+Pruning 20% of parameters produced the best test accuracy (98.38%), slightly outperforming both baselines. This suggests that moderate sparsification improved generalization by reducing overfitting.
+Key improvements:
+  Parameters reduced: 87,108 → 82,948
+  Inference latency reduced: 0.179 ms → 0.0265 ms
+  Accuracy slightly increased
+This shows that controlled pruning can simultaneously:
+  Improve generalization
+  Reduce inference latency
+  Maintain or improve accuracy
+Pruning achieved a strong balance between efficiency and predictive performance.
+
+3️⃣ FP16 Quantization
+FP16 quantization dramatically reduced:
+  Parameters: 87,108 → 22,980
+  Memory usage: 19.64 MB → 17.69 MB
+  Latency per sample: 0.00248 ms
+
+This configuration achieved the lowest inference latency and smallest memory footprint.
+However, test accuracy dropped to 95.44%, indicating that aggressive quantization introduced representational loss that affected model performance.
+Thus, FP16 quantization is highly effective for deployment scenarios where:
+
+  Real-time inference is critical
+  Memory constraints exist (embedded / edge devices)
+  Slight accuracy loss is acceptable
+
+This experiment demonstrates that model optimization techniques significantly impact deployment characteristics:
+  GPU acceleration improves computational efficiency.
+  Pruning improves generalization while reducing latency.
+  Quantization maximizes speed and compression at the cost of some accuracy.
+
+Among all configurations, 20% pruning provided the best overall trade-off, achieving the highest accuracy with substantially improved inference speed and reduced parameter count.
+
+This highlights that intelligent model compression can improve both performance and efficiency — not just reduce size.
