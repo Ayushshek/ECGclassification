@@ -1,1 +1,30 @@
+(baseline has 2 conv layer 64 filters kernal size 5)
+CPU Baseline
+test accuracy: 0.9812
+Total training time (s): 17.87
+Peak memory usage (MB): 356.16
+Average GPU latency (ms): NA
+Total parameters: 87108
+
+GPU Baseline
+test accuracy: 0.9806
+Total training time (s): 8.52
+Peak GPU memory usage (MB): 19.64
+Average GPU latency (ms): 0.179
+Total parameters: 87108
+
+Pruning (20%)
+test accuracy: 0.98375
+Total training time (s): 8.928260564804077
+Peak GPU memory usage (MB): 20.755968
+Average GPU latency (ms): 0.026512593030929565
+Total parameters: 82948
+
+FP16 Quantization
+test accuracy: 0.954375
+Total training time (s): 8.543
+Peak GPU memory usage (MB): 17.69482421875
+Average GPU latency (ms): 0.0024831399973481894
+Total parameters: 22980
+
 
